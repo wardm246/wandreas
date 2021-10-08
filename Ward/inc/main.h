@@ -1,10 +1,5 @@
 /*
- * beacon.h
- * 
- * belangrijk: opstartvolgorde! 
- * eerst ./service starten
- * vervolgens ./uart starten
- * daarna kunnen andere programma's gewoon gestart worden
+ * main.h
  * 
  */
 
@@ -14,7 +9,7 @@
 #define DEBUG 1
 
 #if DEBUG
-#define DPRINT(...) printf("\E[1;31m" __VA_ARGS__ ) 
+#define DPRINT(...) printf(__VA_ARGS__) 
 #else
 #define DPRINT(...)
 #endif
