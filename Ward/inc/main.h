@@ -14,7 +14,7 @@
 #define DEBUG 1
 
 #if DEBUG
-#define DPRINT(...) printf("\E[1;31m") printf(__VA_ARGS__) printf("\E[0m\n") 
+#define DPRINT(...) printf("\E[1;31m" __VA_ARGS__ ) 
 #else
 #define DPRINT(...)
 #endif

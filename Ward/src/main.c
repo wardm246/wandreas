@@ -34,8 +34,8 @@ int setupUart(void)
 */
 void main(void)
 {
-	
-		DPRINT("HELLO WORLD");
+	int i = 16;
+		DPRINT("HELLO WORLD, %d",i);
 		
 		
 	
