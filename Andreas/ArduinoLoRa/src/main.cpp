@@ -1,6 +1,11 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
+#include <DHT_U.h>
+
+#define DHTPIN 5
+#define DHTTYPE DHT11
+DHT_Unified dht(DHTPIN, DHTTYPE);
 
 //
 // For normal use, we require that you edit the sketch to replace FILLMEIN
@@ -36,7 +41,8 @@ void os_getDevEui(u1_t *buf) { memcpy_P(buf, DEVEUI, 8); }
 static const u1_t PROGMEM APPKEY[16] = {0x77, 0xB4, 0xD9, 0xE6, 0xC1, 0xD5, 0x1F, 0x44, 0x4D, 0x93, 0x11, 0x4C, 0x47, 0x02, 0x4B, 0x87};
 void os_getDevKey(u1_t *buf) { memcpy_P(buf, APPKEY, 16); }
 
-static uint8_t mydata[] = "Hello, gamers!";
+// static uint8_t mypayload[] = "Hello Gamers!";
+static uint8_t mypayload[5];
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -195,7 +201,33 @@ void do_send(osjob_t *j)
   else
   {
     // Prepare upstream data transmission at the next possible time.
-    LMIC_setTxData2(1, mydata, sizeof(mydata) - 1, 0);
+
+    sensors_event_t dhtEvent;
+    dht.temperature().getEvent(&dhtEvent);
+    float temperature = dhtEvent.temperature;
+    Serial.print("Temperature: "); //added for debug purposes
+    Serial.print(temperature);
+    Serial.println(" *C");
+    temperature = temperature / 100; // adjust for the f2sflt16 range (-1 to 1)
+    dht.humidity().getEvent(&dhtEvent);
+    float relHumidity = dhtEvent.relative_humidity;
+    Serial.print("%RH "); //debug
+    Serial.println(relHumidity);
+    relHumidity = relHumidity / 100; // adjust for the f2sflt16 range (-1 to 1)
+
+    uint16_t payloadTemp = LMIC_f2sflt16(temperature); //float -> int conversion
+    byte tempLow = lowByte(payloadTemp);
+    byte tempHigh = highByte(payloadTemp); //int -> bytes conversion
+    mypayload[0] = tempLow;
+    mypayload[1] = tempHigh; // place the bytes into the payload
+
+    uint16_t payloadRelHumid = LMIC_f2sflt16(relHumidity); //now we do the same steps, but for the humidity
+    byte relHumidLow = lowByte(payloadRelHumid);
+    byte relHumidHigh = highByte(payloadRelHumid);
+    mypayload[2] = relHumidLow;
+    mypayload[3] = relHumidHigh;
+
+    LMIC_setTxData2(1, mypayload, sizeof(mypayload) - 1, 0);
     Serial.println(F("Packet queued"));
   }
   // Next TX is scheduled after TX_COMPLETE event.
@@ -204,7 +236,10 @@ void do_send(osjob_t *j)
 void setup()
 {
   Serial.begin(9600);
-  Serial.println(F("Starting"));
+  Serial.println("Starting DHT11");
+  pinMode(DHTPIN, INPUT);
+  dht.begin();
+  Serial.println(F("Starting Lora"));
 
 #ifdef VCC_ENABLE
   // For Pinoccio Scout boards
