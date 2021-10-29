@@ -205,27 +205,27 @@ void do_send(osjob_t *j)
     sensors_event_t dhtEvent;
     dht.temperature().getEvent(&dhtEvent);
     float temperature = dhtEvent.temperature;
-    Serial.print("Temperature: "); //added for debug purposes
+    Serial.print("Temperature:\t"); //added for debug purposes
     Serial.print(temperature);
     Serial.println(" *C");
     temperature = temperature / 100; // adjust for the f2sflt16 range (-1 to 1)
     dht.humidity().getEvent(&dhtEvent);
     float relHumidity = dhtEvent.relative_humidity;
-    Serial.print("%RH "); //debug
+    Serial.print("RH%:\t\t"); //debug
     Serial.println(relHumidity);
     relHumidity = relHumidity / 100; // adjust for the f2sflt16 range (-1 to 1)
 
     uint16_t payloadTemp = LMIC_f2sflt16(temperature); //float -> int conversion
     byte tempLow = lowByte(payloadTemp);
     byte tempHigh = highByte(payloadTemp); //int -> bytes conversion
-    mypayload[0] = tempLow;
-    mypayload[1] = tempHigh; // place the bytes into the payload
+    mypayload[0] = tempHigh;
+    mypayload[1] = tempLow; // place the bytes into the payload
 
     uint16_t payloadRelHumid = LMIC_f2sflt16(relHumidity); //now we do the same steps, but for the humidity
     byte relHumidLow = lowByte(payloadRelHumid);
     byte relHumidHigh = highByte(payloadRelHumid);
-    mypayload[2] = relHumidLow;
-    mypayload[3] = relHumidHigh;
+    mypayload[2] = relHumidHigh;
+    mypayload[3] = relHumidLow;
 
     LMIC_setTxData2(1, mypayload, sizeof(mypayload) - 1, 0);
     Serial.println(F("Packet queued"));
