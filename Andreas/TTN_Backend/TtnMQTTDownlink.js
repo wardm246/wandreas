@@ -26,14 +26,20 @@ client.on('connect', () => {
     })
 })
 client.on('message', (topic, payload) => {
+    let date_obj = new Date()
+    let hours = ('0' + date_obj.getHours()).slice(-2)
+    let minutes = ('0' + date_obj.getMinutes()).slice(-2)
+    let seconds = ('0' + date_obj.getSeconds()).slice(-2)
+
     const jsonPayload = JSON.parse(payload)
     const jsonData = [
         {
-            timestamp: 1,
+            timestamp: hours + ':' + minutes + ':' + seconds,
             temperature: jsonPayload.uplink_message.decoded_payload.Temp,
             relative_humidity: jsonPayload.uplink_message.decoded_payload.RelHumid
         }]
-    console.log('Message received by client on topic: ', topic, '\nPayload: ', jsonPayload.uplink_message.decoded_payload)
+    console.log('Message received by client on topic: ', topic,
+        '\nPayload: ', jsonPayload.uplink_message.decoded_payload)
 
     const ws = fs.createWriteStream('data.csv', { flags: 'a' })
     fastcsv.write(jsonData, {
