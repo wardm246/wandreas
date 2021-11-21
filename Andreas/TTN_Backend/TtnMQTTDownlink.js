@@ -2,9 +2,7 @@ const mqtt = require('mqtt') // https://www.npmjs.com/package/mqtt
 const fastcsv = require('fast-csv') // https://www.npmjs.com/package/fast-csv
 const fs = require('fs') // https://fedingo.com/how-to-export-to-csv-in-nodejs/
 //-------------------------
-const ws = fs.createWriteStream('data.csv', { flags: 'a' })
 
-//----------
 const host = 'eu1.cloud.thethings.network'
 const port = '1883'
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
@@ -36,7 +34,11 @@ client.on('message', (topic, payload) => {
             relative_humidity: jsonPayload.uplink_message.decoded_payload.RelHumid
         }]
     console.log('Message received by client on topic: ', topic, '\nPayload: ', jsonPayload.uplink_message.decoded_payload)
-    fastcsv.write(jsonData, { headers: true, writeHeaders: false, includeEndRowDelimiter: true }).on('finish', function () {
+
+    const ws = fs.createWriteStream('data.csv', { flags: 'a' })
+    fastcsv.write(jsonData, {
+        headers: fs.existsSync('data.csv') ? false : true, includeEndRowDelimiter: true
+    }).on('finish', function () {
         console.log('Write to CSV successful')
     }).pipe(ws)
 })
