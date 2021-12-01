@@ -1,5 +1,6 @@
 const express = require('express')
-const plotly = require('plotly')
+const plotly = require('plotly')//(AndreasStgm, SvqNUM9cumNHtkrE2GOt)
+const path = require('path')
 
 //-------------------------
 
@@ -8,8 +9,8 @@ const port = 3000
 
 //-------------------------
 
-app.get('/', (req, res) => {
-    res.send('Hello World')
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/visualisationPage.html'))
 })
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)

@@ -28,6 +28,9 @@ client.on('connect', () => {
 })
 client.on('message', (topic, payload) => {
     let date_obj = new Date()
+    let year = date_obj.getFullYear()
+    let month = ('0' + date_obj.getMonth()).slice(-2)
+    let day = ('0' + date_obj.getDay()).slice(-2)
     let hours = ('0' + date_obj.getHours()).slice(-2)
     let minutes = ('0' + date_obj.getMinutes()).slice(-2)
     let seconds = ('0' + date_obj.getSeconds()).slice(-2)
@@ -35,7 +38,7 @@ client.on('message', (topic, payload) => {
     const jsonPayload = JSON.parse(payload)
     const jsonData = [
         {
-            timestamp: hours + ':' + minutes + ':' + seconds,
+            timestamp: year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds,
             temperature: jsonPayload.uplink_message.decoded_payload.Temp,
             relative_humidity: jsonPayload.uplink_message.decoded_payload.RelHumid
         }]
