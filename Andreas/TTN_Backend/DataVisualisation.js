@@ -1,10 +1,21 @@
 const express = require('express') //used for hosting the website
 const path = require('path') //used for sending the html
 
+const { execFile } = require('child_process')
+
 const fastcsv = require('fast-csv') //used for parsing the csv data
 const fs = require('fs')
 
 const plotly = require('plotly')('AndreasStgm', 'SvqNUM9cumNHtkrE2GOt') //used for plotting the data
+
+//----------MQTT Downlink----------
+
+const child = execFile('node', ['./TtnMQTTDownlink.js'], (error, stdout, stderr) => {
+    if (error) {
+        throw error
+    }
+    console.log(stdout)
+})
 
 //----------Express Front-End----------
 
@@ -28,7 +39,7 @@ const watch = fs.watchFile(dataFile, () => {
     temperatureArray.length = 0
     relHumidArray.length = 0
 
-    const rs = fs.createReadStream(dataFile);
+    const rs = fs.createReadStream(dataFile)
     fastcsv.parseStream(rs, {
         ignoreEmpty: true,
         discardUnmappedColumns: true,

@@ -35,20 +35,25 @@ client.on('message', (topic, payload) => {
     let minutes = ('0' + date_obj.getMinutes()).slice(-2)
     let seconds = ('0' + date_obj.getSeconds()).slice(-2)
 
-    const jsonPayload = JSON.parse(payload)
-    const jsonData = [
-        {
-            timestamp: year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds,
-            temperature: jsonPayload.uplink_message.decoded_payload.Temp,
-            relative_humidity: jsonPayload.uplink_message.decoded_payload.RelHumid
-        }]
-    console.log('Message received by client on topic: ', topic,
-        '\nPayload: ', jsonPayload.uplink_message.decoded_payload)
+    try {
+        const jsonPayload = JSON.parse(payload)
+        const jsonData = [
+            {
+                timestamp: year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds,
+                temperature: jsonPayload.uplink_message.decoded_payload.Temp,
+                relative_humidity: jsonPayload.uplink_message.decoded_payload.RelHumid
+            }]
+        console.log('Message received by client on topic: ', topic,
+            '\nPayload: ', jsonPayload.uplink_message.decoded_payload)
 
-    const ws = fs.createWriteStream('data.csv', { flags: 'a' })
-    fastcsv.write(jsonData, {
-        headers: fs.existsSync('data.csv') ? false : true, includeEndRowDelimiter: true
-    }).on('finish', function () {
-        console.log('Write to CSV successful')
-    }).pipe(ws)
+        const ws = fs.createWriteStream('data.csv', { flags: 'a' })
+        fastcsv.write(jsonData, {
+            headers: fs.existsSync('data.csv') ? false : true, includeEndRowDelimiter: true
+        }).on('finish', function () {
+            console.log('Write to CSV successful')
+        }).pipe(ws)
+    } catch (error) {
+        console.error(error)
+        console.log('An error occured while parsing the JSON object, you probably received the keep alive message')
+    }
 })
