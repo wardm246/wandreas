@@ -90,3 +90,7 @@ var layout = {
     }
 }
 var graphtOptions = { layout: layout, filename: 'visualisation_beehive', fileopt: 'overwrite' }
+
+// plotly.plot(data, graphtOptions, function (err, msg) {
+//     console.log(msg)
+// })
