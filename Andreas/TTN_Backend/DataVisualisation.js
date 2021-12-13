@@ -24,6 +24,9 @@ const dataFile = './data.csv'
 
 const watch = fs.watchFile(dataFile, () => {
     console.log('data.csv was changed')
+    timestampArray.length = 0 // Reset the length of the array to clear it
+    temperatureArray.length = 0
+    relHumidArray.length = 0
 
     const rs = fs.createReadStream(dataFile);
     fastcsv.parseStream(rs, {
@@ -31,20 +34,35 @@ const watch = fs.watchFile(dataFile, () => {
         discardUnmappedColumns: true,
         headers: true
     }).on('error', error => console.error(error))
-        .on('data', readRow => console.log(readRow))
-        .on('end', rowCount => console.log(`Parsed ${rowCount} rows`))
+        .on('data', readRow => {
+            console.log(readRow)
+            timestampArray.push(readRow.timestamp)
+            temperatureArray.push(readRow.temperature)
+            relHumidArray.push(readRow.relative_humidity)
+        })
+        .on('end', rowCount => {
+            console.log(`Parsed ${rowCount} rows`)
+            plotly.plot(data, graphtOptions, function (err, msg) {
+                console.log(msg)
+            })
+        })
 })
 
 //----------Plotly----------
+
+const timestampArray = []
+const temperatureArray = []
+const relHumidArray = []
+
 var traceTemp = {
-    x: ["2013-10-04 22:23:00", "2013-11-04 22:23:00", "2013-12-04 22:23:00"],
-    y: [40, 30, 50],
+    x: timestampArray,
+    y: temperatureArray,
     name: 'Temperature (°C)',
     type: 'scatter'
 }
 var traceRelHumid = {
-    x: ["2013-10-04 22:23:00", "2013-11-04 22:23:00", "2013-12-04 22:23:00"],
-    y: [50, 100, 150],
+    x: timestampArray,
+    y: relHumidArray,
     name: 'Relative Humidity (%)',
     yaxis: 'y2',
     type: 'scatter'
@@ -60,9 +78,4 @@ var layout = {
         side: 'right'
     }
 }
-
 var graphtOptions = { layout: layout, filename: 'visualisation_beehive', fileopt: 'overwrite' }
-plotly.plot(data, graphtOptions, function (err, msg) {
-    console.log(msg)
-})
-
