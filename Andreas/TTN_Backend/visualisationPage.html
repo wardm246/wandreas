@@ -3,6 +3,8 @@
 
 <head>
     <title>Bijenkast Monitoring</title>
+    <link rel="icon" href="https://image.flaticon.com/icons/png/512/235/235425.png" target="_blank"
+        type="image/x-icon" />
     <style type="text/css">
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -25,7 +27,11 @@
             location.reload(true);
         });
     </script>
-
+    <script>
+        window.onresize = () => {
+            window.location.href = window.location.href;
+        };
+    </script>
     <h1 id="title" style="text-align: center;">Visualisatie Data</h1>
 
     <div class="graph">
