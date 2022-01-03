@@ -17,15 +17,26 @@ const child = execFile('node', ['./TtnMQTTDownlink.js'], (error, stdout, stderr)
     console.log(stdout)
 })
 
-//----------Express Front-End----------
+//----------Express/SocketIO Front-End----------
 
-const app = express()
 const port = 3000
+const app = express()
+
+const httpServer = require("http").createServer(app);
+const options = { /* ... */ }
+const io = require("socket.io")(httpServer, options)
+
+io.on('connection', socket => {
+    console.log('SocketIO client connected')
+    socket.on('disconnect', () => {
+        console.log('SocketIO client disconnected')
+    })
+})
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/visualisationPage.html'))
 })
-app.listen(port, () => {
+httpServer.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
 })
 
@@ -56,6 +67,7 @@ const watch = fs.watchFile(dataFile, () => {
             plotly.plot(data, graphtOptions, function (err, msg) {
                 console.log(msg)
             })
+            io.emit('reading change')
         })
 })
 

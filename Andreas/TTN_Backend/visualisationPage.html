@@ -16,13 +16,17 @@
     </style>
 </head>
 
-<body onload="autoRefresh(60000)">
+<body>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        function autoRefresh(time) {
-            setTimeout("location.reload(true);", time);
-        }
+        var socket = io();
+
+        socket.on('reading change', () => {
+            location.reload(true);
+        });
     </script>
-    <h1 style="text-align: center;">Visualisatie Data</h1>
+
+    <h1 id="title" style="text-align: center;">Visualisatie Data</h1>
 
     <div class="graph">
         <embed type="text/html" src="https://chart-studio.plotly.com/~AndreasStgm/1.embed" width="100%" height="100%">
