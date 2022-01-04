@@ -1,0 +1,11 @@
+Added Pin To Net: NetName=TR_MISO Pin=ESP32-WROOM-32D-22
+Added Pin To Net: NetName=TR_MISO Pin=SX1276-17
+Added Net: Name=TR_MISO
+Added Pin To Net: NetName=TR_MOSI Pin=ESP32-WROOM-32D-21
+Added Pin To Net: NetName=TR_MOSI Pin=SX1276-18
+Added Net: Name=TR_MOSI
+Added Pin To Net: NetName=TR_SCK Pin=ESP32-WROOM-32D-20
+Added Pin To Net: NetName=TR_SCK Pin=SX1276-16
+Added Net: Name=TR_SCK
+Added Pin To Net: NetName=TR_SS Pin=SX1276-19
+Added Net: Name=TR_SS

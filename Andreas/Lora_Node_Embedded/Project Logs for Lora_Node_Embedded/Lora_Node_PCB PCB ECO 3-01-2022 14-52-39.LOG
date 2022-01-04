@@ -1,0 +1,11 @@
+Change Component Designator: OldDesignator=IC? NewDesignator=IC1
+Added Component: Designator=IC2(QFN65P600X600X100-29N)
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "SX1276IMLTRT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/sx1276imltrt/semtech?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/1/SX1276IMLTRT.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "SEMTECH"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "SX1276IMLTRT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "947-SX1276IMLTRT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Semtech/SX1276IMLTRT?qs=rBWM4%252BvDhIceYQoeMKd%2FQQ%3D%3D"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Lora_Node_SCH Member=Component IC2 SX1276IMLTRT

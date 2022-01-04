@@ -1,0 +1,3 @@
+Added Pin To Net: NetName=ESP_EN Pin=IC1-3
+Added Pin To Net: NetName=ESP_EN Pin=Programmer-1
+Added Net: Name=ESP_EN

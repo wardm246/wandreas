@@ -1,0 +1,10 @@
+Added Component: Designator=J?(303066002HB)
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "30306-6002HB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/30306-6002hb/3m?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/2/30306-6002HB.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "9.4mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "3M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "30306-6002HB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "517-30306-6002HB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/3M-Electronic-Solutions-Division/30306-6002HB?qs=Z%252B4xWyzEAtfSA90BvXHoAA%3D%3D"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Lora_Node_SCH Member=Component J? 30306-6002HB

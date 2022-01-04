@@ -1,0 +1,15 @@
+Added Pin To Net: NetName=ESP_IO0 Pin=IC1-25
+Added Pin To Net: NetName=ESP_IO0 Pin=Programmer-6
+Added Net: Name=ESP_IO0
+Added Pin To Net: NetName=ESP_RXD Pin=IC1-34
+Added Pin To Net: NetName=ESP_RXD Pin=Programmer-5
+Added Net: Name=ESP_RXD
+Added Pin To Net: NetName=ESP_TXD Pin=IC1-35
+Added Pin To Net: NetName=ESP_TXD Pin=Programmer-3
+Added Net: Name=ESP_TXD
+Added Pin To Net: NetName=GND Pin=IC1-1
+Added Pin To Net: NetName=GND Pin=Programmer-4
+Added Net: Name=GND
+Added Pin To Net: NetName=VDD Pin=IC1-2
+Added Pin To Net: NetName=VDD Pin=Programmer-2
+Added Net: Name=VDD
