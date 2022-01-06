@@ -1,0 +1,6 @@
+Added Component: Designator=U*(RFM92_93W)
+Added Pin To Net: NetName=TR_MISO Pin=U*-2
+Added Pin To Net: NetName=TR_MOSI Pin=U*-3
+Added Pin To Net: NetName=TR_SCK Pin=U*-4
+Added Pin To Net: NetName=TR_SS Pin=U*-5
+Added Member To Class: ClassName=Lora_Node_SCH Member=Component U* RFM92_93W
