@@ -1,0 +1,7 @@
+Added Pin To Net: NetName=VDD Pin=DHT22-1
+Added Pin To Net: NetName=GND Pin=DHT22-4
+Added Pin To Net: NetName=aaa331 Pin=ESP32-WROOM-32D-31
+Added Net: Name=aaa331
+Added Pin To Net: NetName=DHT_DATA Pin=ESP32-WROOM-32D-30
+Added Pin To Net: NetName=DHT_DATA Pin=DHT22-2
+Added Net: Name=DHT_DATA

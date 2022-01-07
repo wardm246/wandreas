@@ -1,0 +1,6 @@
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Added Pin To Net: NetName=TR_DIO0 Pin=ESP32-WROOM-32D-8
+Added Pin To Net: NetName=TR_RESET Pin=ESP32-WROOM-32D-9
+Added Pin To Net: NetName=TR_DIO1 Pin=ESP32-WROOM-32D-10
+Added Pin To Net: NetName=TR_DIO2 Pin=ESP32-WROOM-32D-11
+Added Pin To Net: NetName=TR_DIO5 Pin=ESP32-WROOM-32D-12
