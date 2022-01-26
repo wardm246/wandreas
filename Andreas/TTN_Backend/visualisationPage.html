@@ -24,7 +24,9 @@
         var socket = io();
 
         socket.on('reading change', () => {
-            location.reload(true);
+            window.location.reload(true);
+            // window.location.href = window.location.href;
+            // history.go(0)
         });
     </script>
     <script>
